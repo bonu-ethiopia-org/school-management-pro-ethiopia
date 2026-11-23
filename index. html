@@ -1,1 +1,240 @@
 
+
+<!DOCTYPE html>
+<html lang="om">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>School Management Pro Ethiopia</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial;background:#f2f5fa;color:#172b45}
+header{background:#12345a;color:white;padding:20px}
+header h2{margin:0}
+nav{background:white;padding:10px;display:flex;gap:7px;flex-wrap:wrap}
+nav button{border:0;padding:12px;border-radius:7px;background:#e8eef6;cursor:pointer}
+nav button.active{background:#2167b2;color:white}
+main{padding:20px;max-width:1200px;margin:auto}
+.page{display:none}
+.page.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.card,.panel{background:white;padding:18px;border-radius:12px;margin:12px 0;box-shadow:0 2px 8px #0001}
+.card strong{display:block;font-size:27px;margin-top:10px;color:#12345a}
+input,select{padding:12px;border:1px solid #ccd5e0;border-radius:7px;width:100%;margin:5px 0}
+form{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.primary{background:#2167b2;color:white;border:0;padding:12px;border-radius:7px;cursor:pointer}
+table{width:100%;border-collapse:collapse;min-width:500px}
+th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left}
+.tablebox{overflow-x:auto}
+@media(max-width:700px){
+.cards{grid-template-columns:repeat(2,1fr)}
+form{grid-template-columns:1fr}
+main{padding:12px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<h2>School Management Pro Ethiopia</h2>
+<p>Sirna bulchiinsa mana barumsaa</p>
+</header>
+
+<nav>
+<button class="active" onclick="showPage('home',this)">Dashboard</button>
+<button onclick="showPage('students',this)">Barattoota</button>
+<button onclick="showPage('teachers',this)">Barsiisota</button>
+<button onclick="showPage('attendance',this)">Argama</button>
+<button onclick="showPage('exams',this)">Qormaata</button>
+<button onclick="showPage('finance',this)">Kaffaltii</button>
+<button onclick="showPage('reports',this)">Gabaasa</button>
+</nav>
+
+<main>
+
+<section id="home" class="page active">
+<h2>Dashboard</h2>
+<div class="cards">
+<div class="card">Barattoota<strong id="studentCount">0</strong></div>
+<div class="card">Barsiisota<strong id="teacherCount">0</strong></div>
+<div class="card">Argama<strong>94%</strong></div>
+<div class="card">Mana Barumsaa<strong>1</strong></div>
+</div>
+<div class="panel">
+<h3>Baga nagaan dhuftan!</h3>
+<p>Sirna kanaan barattoota, barsiisota, argama, qormaataa fi kaffaltii mana barumsaa bulchuu dandeessu.</p>
+</div>
+</section>
+
+<section id="students" class="page">
+<h2>Galmee Barattootaa</h2>
+<div class="panel">
+<h3>Barataa haaraa galmeessi</h3>
+<form id="studentForm">
+<input id="sName" placeholder="Maqaa guutuu" required>
+<input id="sId" placeholder="Lakkoofsa galmee" required>
+<select id="sGrade" required>
+<option value="">Kutaa filadhu</option>
+<option>1</option><option>2</option><option>3</option>
+<option>4</option><option>5</option><option>6</option>
+<option>7</option><option>8</option><option>9</option>
+<option>10</option><option>11</option><option>12</option>
+</select>
+<input id="sPhone" placeholder="Bilbila maatii">
+<button class="primary">Galmeessi</button>
+</form>
+</div>
+<div class="panel tablebox">
+<table>
+<thead><tr><th>Maqaa</th><th>ID</th><th>Kutaa</th><th>Bilbila</th></tr></thead>
+<tbody id="studentRows"></tbody>
+</table>
+</div>
+</section>
+
+<section id="teachers" class="page">
+<h2>Galmee Barsiisotaa</h2>
+<div class="panel">
+<form id="teacherForm">
+<input id="tName" placeholder="Maqaa barsiisaa" required>
+<input id="tSubject" placeholder="Barnoota barsiisu" required>
+<input id="tPhone" placeholder="Bilbila">
+<button class="primary">Galmeessi</button>
+</form>
+</div>
+<div class="panel tablebox">
+<table>
+<thead><tr><th>Maqaa</th><th>Barnoota</th><th>Bilbila</th></tr></thead>
+<tbody id="teacherRows"></tbody>
+</table>
+</div>
+</section>
+
+<section id="attendance" class="page">
+<h2>Hordoffii Argamaa</h2>
+<div class="panel">
+<input type="date" id="attDate">
+<input id="attName" placeholder="Maqaa barataa">
+<select id="attStatus">
+<option>Argame</option>
+<option>Hin argamne</option>
+<option>Boqonnaa hayyamame</option>
+</select>
+<button class="primary" onclick="saveAttendance()">Argama galmeessi</button>
+</div>
+<div class="panel tablebox">
+<table>
+<thead><tr><th>Guyyaa</th><th>Barataa</th><th>Haala</th></tr></thead>
+<tbody id="attendanceRows"></tbody>
+</table>
+</div>
+</section>
+
+<section id="exams" class="page">
+<h2>Qormaataa fi Bu'aa</h2>
+<div class="panel">
+<form id="examForm">
+<input id="eName" placeholder="Maqaa barataa" required>
+<input id="eSubject" placeholder="Barnoota" required>
+<input id="eScore" type="number" min="0" max="100" placeholder="Qabxii /100" required>
+<button class="primary">Bu'aa galmeessi</button>
+</form>
+</div>
+<div class="panel tablebox">
+<table>
+<thead><tr><th>Barataa</th><th>Barnoota</th><th>Qabxii</th></tr></thead>
+<tbody id="examRows"></tbody>
+</table>
+</div>
+</section>
+
+<section id="finance" class="page">
+<h2>Kaffaltii Mana Barumsaa</h2>
+<div class="panel">
+<form id="feeForm">
+<input id="fName" placeholder="Maqaa barataa" required>
+<input id="fAmount" type="number" placeholder="Maallaqa ETB" required>
+<select id="fType">
+<option>Kaffaltii barnootaa</option>
+<option>Kaffaltii galmee</option>
+<option>Kaffaltii geejjibaa</option>
+</select>
+<button class="primary">Kaffaltii galmeessi</button>
+</form>
+</div>
+<div class="panel tablebox">
+<table>
+<thead><tr><th>Barataa</th><th>Gosa</th><th>Maallaqa</th></tr></thead>
+<tbody id="feeRows"></tbody>
+</table>
+</div>
+</section>
+
+<section id="reports" class="page">
+<h2>Gabaasa</h2>
+<div class="panel">
+<p>Gabaasa mana barumsaa maxxansuu dandeessu.</p>
+<button class="primary" onclick="window.print()">Gabaasa maxxansi</button>
+</div>
+</section>
+
+</main>
+
+<script>
+function showPage(id,btn){
+ document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+ document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ btn.classList.add('active');
+}
+
+function addRow(id,values){
+ const tr=document.createElement('tr');
+ values.forEach(value=>{
+  const td=document.createElement('td');
+  td.textContent=value;
+  tr.appendChild(td);
+ });
+ document.getElementById(id).appendChild(tr);
+}
+
+document.getElementById('studentForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ addRow('studentRows',[
+  sName.value,sId.value,sGrade.value,sPhone.value
+ ]);
+ studentCount.textContent=Number(studentCount.textContent)+1;
+ this.reset();
+});
+
+document.getElementById('teacherForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ addRow('teacherRows',[tName.value,tSubject.value,tPhone.value]);
+ teacherCount.textContent=Number(teacherCount.textContent)+1;
+ this.reset();
+});
+
+function saveAttendance(){
+ if(!attDate.value || !attName.value){
+  alert('Guyyaa fi maqaa barataa guuti');
+  return;
+ }
+ addRow('attendanceRows',[attDate.value,attName.value,attStatus.value]);
+ attName.value='';
+}
+
+document.getElementById('examForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ addRow('examRows',[eName.value,eSubject.value,eScore.value+'/100']);
+ this.reset();
+});
+
+document.getElementById('feeForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ addRow('feeRows',[fName.value,fType.value,'ETB '+fAmount.value]);
+ this.reset();
+});
+</script>
+
+</body>
+</html>
