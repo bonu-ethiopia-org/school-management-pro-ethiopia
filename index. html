@@ -1,36 +1,27 @@
 
-
 <!DOCTYPE html>
 <html lang="om">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>School Management Pro Ethiopia</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial;background:#f2f5fa;color:#172b45}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f5fa;color:#172b45}
 header{background:#12345a;color:white;padding:20px}
-header h2{margin:0}
-nav{background:white;padding:10px;display:flex;gap:7px;flex-wrap:wrap}
-nav button{border:0;padding:12px;border-radius:7px;background:#e8eef6;cursor:pointer}
-nav button.active{background:#2167b2;color:white}
-main{padding:20px;max-width:1200px;margin:auto}
-.page{display:none}
-.page.active{display:block}
+nav{background:white;padding:10px;display:flex;flex-wrap:wrap;gap:8px}
+nav button,.btn{padding:12px;border:0;border-radius:7px;background:#2167b2;color:white;cursor:pointer}
+main{padding:20px;max-width:1100px;margin:auto}
+.page{display:none}.page.active{display:block}
 .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card,.panel{background:white;padding:18px;border-radius:12px;margin:12px 0;box-shadow:0 2px 8px #0001}
-.card strong{display:block;font-size:27px;margin-top:10px;color:#12345a}
+.card,.panel{background:white;padding:18px;border-radius:12px;margin:12px 0}
+.card strong{display:block;font-size:27px;margin-top:10px}
 input,select{padding:12px;border:1px solid #ccd5e0;border-radius:7px;width:100%;margin:5px 0}
-form{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
-.primary{background:#2167b2;color:white;border:0;padding:12px;border-radius:7px;cursor:pointer}
-table{width:100%;border-collapse:collapse;min-width:500px}
-th,td{padding:12px;border-bottom:1px solid #ddd;text-align:left}
+form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+table{width:100%;border-collapse:collapse;min-width:450px}
+th,td{padding:11px;border-bottom:1px solid #ddd;text-align:left}
 .tablebox{overflow-x:auto}
-@media(max-width:700px){
-.cards{grid-template-columns:repeat(2,1fr)}
-form{grid-template-columns:1fr}
-main{padding:12px}
-}
+@media(max-width:650px){.cards{grid-template-columns:1fr 1fr}form{grid-template-columns:1fr}main{padding:12px}}
 </style>
 </head>
 <body>
@@ -41,7 +32,7 @@ main{padding:12px}
 </header>
 
 <nav>
-<button class="active" onclick="showPage('home',this)">Dashboard</button>
+<button onclick="showPage('home',this)">Dashboard</button>
 <button onclick="showPage('students',this)">Barattoota</button>
 <button onclick="showPage('teachers',this)">Barsiisota</button>
 <button onclick="showPage('attendance',this)">Argama</button>
@@ -58,20 +49,19 @@ main{padding:12px}
 <div class="card">Barattoota<strong id="studentCount">0</strong></div>
 <div class="card">Barsiisota<strong id="teacherCount">0</strong></div>
 <div class="card">Argama<strong>94%</strong></div>
-<div class="card">Mana Barumsaa<strong>1</strong></div>
+<div class="card">Mana barumsaa<strong>1</strong></div>
 </div>
 <div class="panel">
 <h3>Baga nagaan dhuftan!</h3>
-<p>Sirna kanaan barattoota, barsiisota, argama, qormaataa fi kaffaltii mana barumsaa bulchuu dandeessu.</p>
+<p>Sirna kanaan hojii mana barumsaa bulchuu dandeessu.</p>
 </div>
 </section>
 
 <section id="students" class="page">
 <h2>Galmee Barattootaa</h2>
 <div class="panel">
-<h3>Barataa haaraa galmeessi</h3>
 <form id="studentForm">
-<input id="sName" placeholder="Maqaa guutuu" required>
+<input id="sName" placeholder="Maqaa barataa" required>
 <input id="sId" placeholder="Lakkoofsa galmee" required>
 <select id="sGrade" required>
 <option value="">Kutaa filadhu</option>
@@ -81,7 +71,7 @@ main{padding:12px}
 <option>10</option><option>11</option><option>12</option>
 </select>
 <input id="sPhone" placeholder="Bilbila maatii">
-<button class="primary">Galmeessi</button>
+<button class="btn">Barataa galmeessi</button>
 </form>
 </div>
 <div class="panel tablebox">
@@ -99,7 +89,7 @@ main{padding:12px}
 <input id="tName" placeholder="Maqaa barsiisaa" required>
 <input id="tSubject" placeholder="Barnoota barsiisu" required>
 <input id="tPhone" placeholder="Bilbila">
-<button class="primary">Galmeessi</button>
+<button class="btn">Barsiisaa galmeessi</button>
 </form>
 </div>
 <div class="panel tablebox">
@@ -120,7 +110,7 @@ main{padding:12px}
 <option>Hin argamne</option>
 <option>Boqonnaa hayyamame</option>
 </select>
-<button class="primary" onclick="saveAttendance()">Argama galmeessi</button>
+<button class="btn" onclick="saveAttendance()">Argama galmeessi</button>
 </div>
 <div class="panel tablebox">
 <table>
@@ -137,7 +127,7 @@ main{padding:12px}
 <input id="eName" placeholder="Maqaa barataa" required>
 <input id="eSubject" placeholder="Barnoota" required>
 <input id="eScore" type="number" min="0" max="100" placeholder="Qabxii /100" required>
-<button class="primary">Bu'aa galmeessi</button>
+<button class="btn">Bu'aa galmeessi</button>
 </form>
 </div>
 <div class="panel tablebox">
@@ -153,13 +143,13 @@ main{padding:12px}
 <div class="panel">
 <form id="feeForm">
 <input id="fName" placeholder="Maqaa barataa" required>
-<input id="fAmount" type="number" placeholder="Maallaqa ETB" required>
+<input id="fAmount" type="number" min="1" placeholder="Maallaqa ETB" required>
 <select id="fType">
 <option>Kaffaltii barnootaa</option>
 <option>Kaffaltii galmee</option>
 <option>Kaffaltii geejjibaa</option>
 </select>
-<button class="primary">Kaffaltii galmeessi</button>
+<button class="btn">Kaffaltii galmeessi</button>
 </form>
 </div>
 <div class="panel tablebox">
@@ -173,67 +163,85 @@ main{padding:12px}
 <section id="reports" class="page">
 <h2>Gabaasa</h2>
 <div class="panel">
-<p>Gabaasa mana barumsaa maxxansuu dandeessu.</p>
-<button class="primary" onclick="window.print()">Gabaasa maxxansi</button>
+<p>Gabaasa mana barumsaa maxxansi.</p>
+<button class="btn" onclick="window.print()">Maxxansi</button>
 </div>
 </section>
 
 </main>
 
 <script>
-function showPage(id,btn){
+function showPage(id,button){
  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
  document.getElementById(id).classList.add('active');
- btn.classList.add('active');
 }
 
-function addRow(id,values){
- const tr=document.createElement('tr');
+function addRow(tableId,values){
+ const row=document.createElement('tr');
  values.forEach(value=>{
-  const td=document.createElement('td');
-  td.textContent=value;
-  tr.appendChild(td);
+  const cell=document.createElement('td');
+  cell.textContent=value;
+  row.appendChild(cell);
  });
- document.getElementById(id).appendChild(tr);
+ document.getElementById(tableId).appendChild(row);
 }
 
 document.getElementById('studentForm').addEventListener('submit',function(e){
  e.preventDefault();
  addRow('studentRows',[
-  sName.value,sId.value,sGrade.value,sPhone.value
+  document.getElementById('sName').value,
+  document.getElementById('sId').value,
+  document.getElementById('sGrade').value,
+  document.getElementById('sPhone').value
  ]);
- studentCount.textContent=Number(studentCount.textContent)+1;
+ document.getElementById('studentCount').textContent=
+ Number(document.getElementById('studentCount').textContent)+1;
  this.reset();
 });
 
 document.getElementById('teacherForm').addEventListener('submit',function(e){
  e.preventDefault();
- addRow('teacherRows',[tName.value,tSubject.value,tPhone.value]);
- teacherCount.textContent=Number(teacherCount.textContent)+1;
+ addRow('teacherRows',[
+  document.getElementById('tName').value,
+  document.getElementById('tSubject').value,
+  document.getElementById('tPhone').value
+ ]);
+ document.getElementById('teacherCount').textContent=
+ Number(document.getElementById('teacherCount').textContent)+1;
  this.reset();
 });
 
 function saveAttendance(){
- if(!attDate.value || !attName.value){
-  alert('Guyyaa fi maqaa barataa guuti');
-  return;
- }
- addRow('attendanceRows',[attDate.value,attName.value,attStatus.value]);
- attName.value='';
+ const date=document.getElementById('attDate').value;
+ const name=document.getElementById('attName').value;
+ const status=document.getElementById('attStatus').value;
+ if(!date||!name){alert('Guyyaa fi maqaa guuti');return;}
+ addRow('attendanceRows',[date,name,status]);
+ document.getElementById('attName').value='';
 }
 
 document.getElementById('examForm').addEventListener('submit',function(e){
  e.preventDefault();
- addRow('examRows',[eName.value,eSubject.value,eScore.value+'/100']);
+ addRow('examRows',[
+  document.getElementById('eName').value,
+  document.getElementById('eSubject').value,
+  document.getElementById('eScore').value+'/100'
+ ]);
  this.reset();
 });
 
 document.getElementById('feeForm').addEventListener('submit',function(e){
  e.preventDefault();
- addRow('feeRows',[fName.value,fType.value,'ETB '+fAmount.value]);
+ addRow('feeRows',[
+  document.getElementById('fName').value,
+  document.getElementById('fType').value,
+  'ETB '+document.getElementById('fAmount').value
+ ]);
  this.reset();
 });
+
+document.getElementById('attDate').value=
+ new Date().toISOString().slice(0,10);
 </script>
 
 </body>
