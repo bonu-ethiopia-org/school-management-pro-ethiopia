@@ -1,248 +1,357 @@
-
 <!DOCTYPE html>
-<html lang="om">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>School Management Pro Ethiopia</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f2f5fa;color:#172b45}
-header{background:#12345a;color:white;padding:20px}
-nav{background:white;padding:10px;display:flex;flex-wrap:wrap;gap:8px}
-nav button,.btn{padding:12px;border:0;border-radius:7px;background:#2167b2;color:white;cursor:pointer}
-main{padding:20px;max-width:1100px;margin:auto}
+body{margin:0;font-family:Arial,sans-serif;background:#f2f5f9;color:#172b4d}
+header{background:#102a43;color:white;padding:18px;display:flex;justify-content:space-between;align-items:center}
+header h2{margin:0;font-size:19px}
+nav{background:#173b59;padding:10px;display:flex;gap:7px;flex-wrap:wrap}
+nav button{background:transparent;color:white;border:0;padding:10px;cursor:pointer;border-radius:6px}
+nav button:hover{background:#2872a4}
+main{padding:20px;max-width:1200px;margin:auto}
 .page{display:none}.page.active{display:block}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
-.card,.panel{background:white;padding:18px;border-radius:12px;margin:12px 0}
-.card strong{display:block;font-size:27px;margin-top:10px}
-input,select{padding:12px;border:1px solid #ccd5e0;border-radius:7px;width:100%;margin:5px 0}
-form{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-table{width:100%;border-collapse:collapse;min-width:450px}
-th,td{padding:11px;border-bottom:1px solid #ddd;text-align:left}
-.tablebox{overflow-x:auto}
-@media(max-width:650px){.cards{grid-template-columns:1fr 1fr}form{grid-template-columns:1fr}main{padding:12px}}
+h1{font-size:23px}h3{margin-top:0}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px}
+.card,.panel{background:white;padding:18px;border-radius:12px;margin-bottom:15px;box-shadow:0 3px 12px #0000000c}
+.card h2{font-size:27px;color:#1769aa;margin:10px 0}
+button,.btn{background:#1769aa;color:white;border:0;padding:10px 14px;border-radius:7px;cursor:pointer}
+input,select{padding:10px;border:1px solid #ccd6e0;border-radius:7px;margin:5px;max-width:100%}
+table{width:100%;border-collapse:collapse;background:white;min-width:550px}
+th,td{text-align:left;padding:12px;border-bottom:1px solid #e4eaf1;font-size:13px}
+th{background:#edf3f8}
+.tablebox{overflow:auto}
+.formrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.formrow input,.formrow select{flex:1;min-width:130px}
+.badge{background:#e0f5e9;color:#14734d;padding:5px 9px;border-radius:20px}
+footer{text-align:center;color:#778;padding:25px;font-size:12px}
+@media(max-width:600px){header{align-items:flex-start;gap:8px;flex-direction:column}main{padding:12px}nav button{font-size:12px;padding:8px}}
 </style>
 </head>
 <body>
 
 <header>
-<h2>School Management Pro Ethiopia</h2>
-<p>Sirna bulchiinsa mana barumsaa</p>
+ <div>
+  <h2>🏫 School Management Pro Ethiopia</h2>
+  <small>Education Management System</small>
+ </div>
+ <span>Administrator</span>
 </header>
 
 <nav>
-<button onclick="showPage('home',this)">Dashboard</button>
-<button onclick="showPage('students',this)">Barattoota</button>
-<button onclick="showPage('teachers',this)">Barsiisota</button>
-<button onclick="showPage('attendance',this)">Argama</button>
-<button onclick="showPage('exams',this)">Qormaata</button>
-<button onclick="showPage('finance',this)">Kaffaltii</button>
-<button onclick="showPage('reports',this)">Gabaasa</button>
+ <button onclick="showPage('dashboard')">Dashboard</button>
+ <button onclick="showPage('schools')">Schools</button>
+ <button onclick="showPage('students')">Students</button>
+ <button onclick="showPage('teachers')">Teachers</button>
+ <button onclick="showPage('attendance')">Attendance</button>
+ <button onclick="showPage('exams')">Exams</button>
+ <button onclick="showPage('finance')">Finance</button>
+ <button onclick="showPage('parents')">Parents</button>
+ <button onclick="showPage('reports')">Reports</button>
+ <button onclick="showPage('settings')">Settings</button>
 </nav>
 
 <main>
 
-<section id="home" class="page active">
-<h2>Dashboard</h2>
-<div class="cards">
-<div class="card">Barattoota<strong id="studentCount">0</strong></div>
-<div class="card">Barsiisota<strong id="teacherCount">0</strong></div>
-<div class="card">Argama<strong>94%</strong></div>
-<div class="card">Mana barumsaa<strong>1</strong></div>
-</div>
-<div class="panel">
-<h3>Baga nagaan dhuftan!</h3>
-<p>Sirna kanaan hojii mana barumsaa bulchuu dandeessu.</p>
-</div>
+<section id="dashboard" class="page active">
+ <h1>School Dashboard</h1>
+ <p>Welcome to School Management Pro Ethiopia.</p>
+ <div class="cards">
+  <div class="card">Total Students<h2 id="studentTotal">0</h2></div>
+  <div class="card">Total Teachers<h2 id="teacherTotal">0</h2></div>
+  <div class="card">Attendance<h2>94%</h2></div>
+  <div class="card">Fee Collection<h2>ETB 846K</h2></div>
+ </div>
+ <div class="panel">
+  <h3>Quick Actions</h3>
+  <button onclick="showPage('students')">Register Student</button>
+  <button onclick="showPage('teachers')">Add Teacher</button>
+  <button onclick="showPage('attendance')">Attendance</button>
+  <button onclick="showPage('finance')">Record Payment</button>
+ </div>
+</section>
+
+<section id="schools" class="page">
+ <h1>School Management</h1>
+ <div class="panel">
+  <form id="schoolForm" class="formrow">
+   <input name="name" placeholder="School name" required>
+   <input name="location" placeholder="Location" required>
+   <select name="level"><option>Primary</option><option>Secondary</option><option>Primary and Secondary</option></select>
+   <button>Add School</button>
+  </form>
+ </div>
+ <div class="tablebox"><table>
+ <thead><tr><th>School</th><th>Location</th><th>Level</th></tr></thead>
+ <tbody id="schoolList"></tbody></table></div>
 </section>
 
 <section id="students" class="page">
-<h2>Galmee Barattootaa</h2>
-<div class="panel">
-<form id="studentForm">
-<input id="sName" placeholder="Maqaa barataa" required>
-<input id="sId" placeholder="Lakkoofsa galmee" required>
-<select id="sGrade" required>
-<option value="">Kutaa filadhu</option>
-<option>1</option><option>2</option><option>3</option>
-<option>4</option><option>5</option><option>6</option>
-<option>7</option><option>8</option><option>9</option>
-<option>10</option><option>11</option><option>12</option>
-</select>
-<input id="sPhone" placeholder="Bilbila maatii">
-<button class="btn">Barataa galmeessi</button>
-</form>
-</div>
-<div class="panel tablebox">
-<table>
-<thead><tr><th>Maqaa</th><th>ID</th><th>Kutaa</th><th>Bilbila</th></tr></thead>
-<tbody id="studentRows"></tbody>
-</table>
-</div>
+ <h1>Student Registration</h1>
+ <div class="panel">
+  <form id="studentForm" class="formrow">
+   <input name="id" placeholder="Student ID" required>
+   <input name="name" placeholder="Full name" required>
+   <select name="grade">
+    <option>Grade 1</option><option>Grade 2</option>
+    <option>Grade 3</option><option>Grade 4</option>
+    <option>Grade 5</option><option>Grade 6</option>
+    <option>Grade 7</option><option>Grade 8</option>
+    <option>Grade 9</option><option>Grade 10</option>
+    <option>Grade 11</option><option>Grade 12</option>
+   </select>
+   <select name="gender"><option>Male</option><option>Female</option></select>
+   <input name="guardian" placeholder="Parent/Guardian">
+   <button>Register Student</button>
+  </form>
+ </div>
+ <input id="studentSearch" placeholder="Search students..." oninput="renderStudents()">
+ <div class="tablebox"><table>
+ <thead><tr><th>ID</th><th>Name</th><th>Grade</th><th>Gender</th><th>Guardian</th></tr></thead>
+ <tbody id="studentList"></tbody></table></div>
 </section>
 
 <section id="teachers" class="page">
-<h2>Galmee Barsiisotaa</h2>
-<div class="panel">
-<form id="teacherForm">
-<input id="tName" placeholder="Maqaa barsiisaa" required>
-<input id="tSubject" placeholder="Barnoota barsiisu" required>
-<input id="tPhone" placeholder="Bilbila">
-<button class="btn">Barsiisaa galmeessi</button>
-</form>
-</div>
-<div class="panel tablebox">
-<table>
-<thead><tr><th>Maqaa</th><th>Barnoota</th><th>Bilbila</th></tr></thead>
-<tbody id="teacherRows"></tbody>
-</table>
-</div>
+ <h1>Teacher Management</h1>
+ <div class="panel">
+  <form id="teacherForm" class="formrow">
+   <input name="id" placeholder="Teacher ID" required>
+   <input name="name" placeholder="Full name" required>
+   <input name="subject" placeholder="Subject">
+   <input name="phone" placeholder="Phone">
+   <button>Add Teacher</button>
+  </form>
+ </div>
+ <div class="tablebox"><table>
+ <thead><tr><th>ID</th><th>Name</th><th>Subject</th><th>Phone</th></tr></thead>
+ <tbody id="teacherList"></tbody></table></div>
 </section>
 
 <section id="attendance" class="page">
-<h2>Hordoffii Argamaa</h2>
-<div class="panel">
-<input type="date" id="attDate">
-<input id="attName" placeholder="Maqaa barataa">
-<select id="attStatus">
-<option>Argame</option>
-<option>Hin argamne</option>
-<option>Boqonnaa hayyamame</option>
-</select>
-<button class="btn" onclick="saveAttendance()">Argama galmeessi</button>
-</div>
-<div class="panel tablebox">
-<table>
-<thead><tr><th>Guyyaa</th><th>Barataa</th><th>Haala</th></tr></thead>
-<tbody id="attendanceRows"></tbody>
-</table>
-</div>
+ <h1>Student Attendance</h1>
+ <div class="panel">
+  <label>Date:</label><input type="date" id="attDate">
+  <button onclick="saveAttendance()">Save Attendance</button>
+ </div>
+ <div class="tablebox"><table>
+ <thead><tr><th>Student</th><th>Grade</th><th>Status</th></tr></thead>
+ <tbody id="attendanceList"></tbody></table></div>
 </section>
 
 <section id="exams" class="page">
-<h2>Qormaataa fi Bu'aa</h2>
-<div class="panel">
-<form id="examForm">
-<input id="eName" placeholder="Maqaa barataa" required>
-<input id="eSubject" placeholder="Barnoota" required>
-<input id="eScore" type="number" min="0" max="100" placeholder="Qabxii /100" required>
-<button class="btn">Bu'aa galmeessi</button>
-</form>
-</div>
-<div class="panel tablebox">
-<table>
-<thead><tr><th>Barataa</th><th>Barnoota</th><th>Qabxii</th></tr></thead>
-<tbody id="examRows"></tbody>
-</table>
-</div>
+ <h1>Exams and Results</h1>
+ <div class="panel">
+  <form id="examForm" class="formrow">
+   <input name="student" placeholder="Student name" required>
+   <input name="subject" placeholder="Subject" required>
+   <input name="grade" placeholder="Grade">
+   <input name="mark" type="number" min="0" max="100" placeholder="Mark / 100" required>
+   <button>Save Result</button>
+  </form>
+ </div>
+ <div class="tablebox"><table>
+ <thead><tr><th>Student</th><th>Subject</th><th>Grade</th><th>Mark</th><th>Result</th></tr></thead>
+ <tbody id="examList"></tbody></table></div>
 </section>
 
 <section id="finance" class="page">
-<h2>Kaffaltii Mana Barumsaa</h2>
-<div class="panel">
-<form id="feeForm">
-<input id="fName" placeholder="Maqaa barataa" required>
-<input id="fAmount" type="number" min="1" placeholder="Maallaqa ETB" required>
-<select id="fType">
-<option>Kaffaltii barnootaa</option>
-<option>Kaffaltii galmee</option>
-<option>Kaffaltii geejjibaa</option>
-</select>
-<button class="btn">Kaffaltii galmeessi</button>
-</form>
-</div>
-<div class="panel tablebox">
-<table>
-<thead><tr><th>Barataa</th><th>Gosa</th><th>Maallaqa</th></tr></thead>
-<tbody id="feeRows"></tbody>
-</table>
-</div>
+ <h1>Finance Management</h1>
+ <div class="panel">
+  <form id="paymentForm" class="formrow">
+   <input name="student" placeholder="Student name" required>
+   <input name="description" placeholder="Payment description">
+   <input name="amount" type="number" placeholder="Amount ETB" required>
+   <select name="method"><option>Cash</option><option>Bank</option><option>Mobile Money</option></select>
+   <button>Record Payment</button>
+  </form>
+ </div>
+ <div class="tablebox"><table>
+ <thead><tr><th>Student</th><th>Description</th><th>Amount</th><th>Method</th></tr></thead>
+ <tbody id="paymentList"></tbody></table></div>
+</section>
+
+<section id="parents" class="page">
+ <h1>Parent Portal</h1>
+ <div class="cards">
+  <div class="card"><h3>Academic Results</h3><p>Parents can view published student results.</p></div>
+  <div class="card"><h3>Attendance</h3><p>Parents can follow student attendance.</p></div>
+  <div class="card"><h3>School Fees</h3><p>Parents can review payment statements.</p></div>
+ </div>
+ <p>Parent accounts require secure login and a connected database in the production version.</p>
 </section>
 
 <section id="reports" class="page">
-<h2>Gabaasa</h2>
-<div class="panel">
-<p>Gabaasa mana barumsaa maxxansi.</p>
-<button class="btn" onclick="window.print()">Maxxansi</button>
-</div>
+ <h1>Reports and Analytics</h1>
+ <div class="panel">
+  <h3>School Reports</h3>
+  <button onclick="exportCSV('students')">Export Students CSV</button>
+  <button onclick="exportCSV('teachers')">Export Teachers CSV</button>
+  <button onclick="exportCSV('exams')">Export Exam Results CSV</button>
+  <button onclick="exportCSV('payments')">Export Payments CSV</button>
+ </div>
+</section>
+
+<section id="settings" class="page">
+ <h1>System Settings</h1>
+ <div class="panel">
+  <p><b>Platform:</b> School Management Pro Ethiopia</p>
+  <p><b>Currency:</b> Ethiopian Birr (ETB)</p>
+  <p><b>Languages:</b> English, Afaan Oromoo, Amharic</p>
+  <p><b>School levels:</b> Primary and Secondary</p>
+  <button onclick="clearData()">Clear Demo Data</button>
+ </div>
+ <div class="panel">
+  <h3>User Roles</h3>
+  <p>Super Admin – Platform management</p>
+  <p>School Owner – School oversight</p>
+  <p>Director – Academic administration</p>
+  <p>Accountant – Finance management</p>
+  <p>Teacher – Class, attendance and results</p>
+  <p>Parent – Child's school information</p>
+ </div>
 </section>
 
 </main>
 
+<footer>
+ School Management Pro Ethiopia · Education Management Platform
+</footer>
+
 <script>
-function showPage(id,button){
+const KEY="schoolProEthiopiaData";
+
+let data=JSON.parse(localStorage.getItem(KEY)||'null')||{
+ students:[],teachers:[],schools:[],exams:[],payments:[]
+};
+
+function saveData(){
+ localStorage.setItem(KEY,JSON.stringify(data));
+ updateDashboard();
+}
+
+function showPage(id){
  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
  document.getElementById(id).classList.add('active');
+ if(id==="attendance")renderAttendance();
 }
 
-function addRow(tableId,values){
- const row=document.createElement('tr');
- values.forEach(value=>{
-  const cell=document.createElement('td');
-  cell.textContent=value;
-  row.appendChild(cell);
- });
- document.getElementById(tableId).appendChild(row);
+function updateDashboard(){
+ document.getElementById('studentTotal').textContent=data.students.length;
+ document.getElementById('teacherTotal').textContent=data.teachers.length;
 }
 
-document.getElementById('studentForm').addEventListener('submit',function(e){
- e.preventDefault();
- addRow('studentRows',[
-  document.getElementById('sName').value,
-  document.getElementById('sId').value,
-  document.getElementById('sGrade').value,
-  document.getElementById('sPhone').value
- ]);
- document.getElementById('studentCount').textContent=
- Number(document.getElementById('studentCount').textContent)+1;
- this.reset();
-});
+function renderStudents(){
+ let q=document.getElementById('studentSearch').value.toLowerCase();
+ document.getElementById('studentList').innerHTML=data.students
+ .filter(s=>(s.name+s.id+s.grade).toLowerCase().includes(q))
+ .map(s=>`<tr><td>${safe(s.id)}</td><td>${safe(s.name)}</td><td>${safe(s.grade)}</td><td>${safe(s.gender)}</td><td>${safe(s.guardian)}</td></tr>`).join('');
+}
 
-document.getElementById('teacherForm').addEventListener('submit',function(e){
- e.preventDefault();
- addRow('teacherRows',[
-  document.getElementById('tName').value,
-  document.getElementById('tSubject').value,
-  document.getElementById('tPhone').value
- ]);
- document.getElementById('teacherCount').textContent=
- Number(document.getElementById('teacherCount').textContent)+1;
- this.reset();
-});
+function renderTeachers(){
+ document.getElementById('teacherList').innerHTML=data.teachers
+ .map(t=>`<tr><td>${safe(t.id)}</td><td>${safe(t.name)}</td><td>${safe(t.subject)}</td><td>${safe(t.phone)}</td></tr>`).join('');
+}
+
+function renderSchools(){
+ document.getElementById('schoolList').innerHTML=data.schools
+ .map(s=>`<tr><td>${safe(s.name)}</td><td>${safe(s.location)}</td><td>${safe(s.level)}</td></tr>`).join('');
+}
+
+function renderAttendance(){
+ document.getElementById('attendanceList').innerHTML=data.students.map(s=>
+ `<tr><td>${safe(s.name)}</td><td>${safe(s.grade)}</td><td>
+ <select class="att" data-id="${safe(s.id)}">
+ <option>Present</option><option>Absent</option><option>Late</option>
+ </select></td></tr>`).join('');
+}
 
 function saveAttendance(){
- const date=document.getElementById('attDate').value;
- const name=document.getElementById('attName').value;
- const status=document.getElementById('attStatus').value;
- if(!date||!name){alert('Guyyaa fi maqaa guuti');return;}
- addRow('attendanceRows',[date,name,status]);
- document.getElementById('attName').value='';
+ let records=[...document.querySelectorAll('.att')].map(x=>({
+ id:x.dataset.id,status:x.value,date:document.getElementById('attDate').value
+ }));
+ localStorage.setItem(KEY+'Attendance',JSON.stringify(records));
+ alert('Attendance saved in this browser.');
 }
 
-document.getElementById('examForm').addEventListener('submit',function(e){
+function renderExams(){
+ document.getElementById('examList').innerHTML=data.exams.map(e=>
+ `<tr><td>${safe(e.student)}</td><td>${safe(e.subject)}</td><td>${safe(e.grade)}</td><td>${e.mark}</td><td>${Number(e.mark)>=50?'Pass':'Fail'}</td></tr>`).join('');
+}
+
+function renderPayments(){
+ document.getElementById('paymentList').innerHTML=data.payments.map(p=>
+ `<tr><td>${safe(p.student)}</td><td>${safe(p.description)}</td><td>${p.amount} ETB</td><td>${safe(p.method)}</td></tr>`).join('');
+}
+
+function safe(v){
+ return String(v||'').replace(/[&<>"']/g,c=>({
+ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+ }[c]));
+}
+
+document.getElementById('studentForm').addEventListener('submit',e=>{
  e.preventDefault();
- addRow('examRows',[
-  document.getElementById('eName').value,
-  document.getElementById('eSubject').value,
-  document.getElementById('eScore').value+'/100'
- ]);
- this.reset();
+ let x=Object.fromEntries(new FormData(e.target));
+ if(data.students.some(s=>s.id===x.id)){alert('Student ID already exists');return}
+ data.students.push(x);saveData();renderStudents();renderAttendance();e.target.reset();
+ alert('Student registered.');
 });
 
-document.getElementById('feeForm').addEventListener('submit',function(e){
+document.getElementById('teacherForm').addEventListener('submit',e=>{
  e.preventDefault();
- addRow('feeRows',[
-  document.getElementById('fName').value,
-  document.getElementById('fType').value,
-  'ETB '+document.getElementById('fAmount').value
- ]);
- this.reset();
+ data.teachers.push(Object.fromEntries(new FormData(e.target)));
+ saveData();renderTeachers();e.target.reset();alert('Teacher added.');
 });
 
-document.getElementById('attDate').value=
- new Date().toISOString().slice(0,10);
+document.getElementById('schoolForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ data.schools.push(Object.fromEntries(new FormData(e.target)));
+ saveData();renderSchools();e.target.reset();alert('School added.');
+});
+
+document.getElementById('examForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ let x=Object.fromEntries(new FormData(e.target));
+ x.mark=Number(x.mark);
+ data.exams.push(x);saveData();renderExams();e.target.reset();
+ alert('Exam result saved.');
+});
+
+document.getElementById('paymentForm').addEventListener('submit',e=>{
+ e.preventDefault();
+ let x=Object.fromEntries(new FormData(e.target));
+ x.amount=Number(x.amount);
+ data.payments.push(x);saveData();renderPayments();e.target.reset();
+ alert('Payment recorded.');
+});
+
+function exportCSV(type){
+ let rows=data[type];
+ if(!rows.length){alert('No records to export.');return}
+ let keys=Object.keys(rows[0]);
+ let csv=[keys.join(','),...rows.map(r=>keys.map(k=>'"'+String(r[k]??'').replace(/"/g,'""')+'"').join(','))].join('\n');
+ let a=document.createElement('a');
+ a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+ a.download=type+'.csv';a.click();
+ URL.revokeObjectURL(a.href);
+}
+
+function clearData(){
+ if(confirm('Delete all demo records from this browser?')){
+ localStorage.removeItem(KEY);location.reload();
+ }
+}
+
+renderStudents();
+renderTeachers();
+renderSchools();
+renderExams();
+renderPayments();
+updateDashboard();
+document.getElementById('attDate').value=new Date().toISOString().slice(0,10);
 </script>
-
 </body>
 </html>
